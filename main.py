@@ -19,10 +19,11 @@ def main():
     service = mtds.get_authenticated_service()
     
     query = mtds.searchGame(input_game, dados_instanciados)
-    start_time = query.date
-    start_time, end_time, timezone = mtds.eventConfiguration(start_time)
+    
     
     if query:
+        start_time = query.date
+        start_time, end_time, timezone = mtds.eventConfiguration(start_time)
         print(f"Jogo encontrado!! {input_game}")
         option = str(input("Deseja criar um lembrete no Google Calendar? [ S ] - Sim || [ N ] - Não: "))
         driver.quit()
