@@ -34,12 +34,11 @@ Três arquivos externos são necessários:
 		**Primeiro:** Arquivo contendo o nome do jogo a ser pesquisado.
 		**Segundo:** Arquivo .json contendo as credenciais da API do Google Agenda.
 		**Terceiro:** Gerado automaticamente. Contém o hash de permissão de acesso ao Google Calendar do usuário. (Isto foi feito para evitar a atividade repetitiva de permitir o acesso a cada execução.)
-		
-	O jogo presente no arquivo de entrada é então procurado na base de dados que foi coletada e, se encontrado, pergunta ao usuário se ele deseja fazer um evento automaticamente no Google Calendar no dia do lançamento do jogo em questão. Caso o jogo não for encontrado, a mensagem “Jogo não encontrado” será exibida no terminal.
+		O jogo presente no arquivo de entrada é então procurado na base de dados que foi coletada e, se encontrado, pergunta ao usuário se ele deseja fazer um evento automaticamente no Google Calendar no dia do lançamento do jogo em questão. Caso o jogo não for encontrado, a mensagem “Jogo não encontrado” será exibida no terminal.
 
 
 ## Guia para reproduzir localmente:
-*PDFcom o guia para rodar o script localmente: [PDF](https://docs.google.com/document/d/1ZOlzRWwjN_eufH4mNfXJrsYaXgW2XWKz75QBpW9vHRk/edit?usp=sharing)*
+*PDF com o guia para rodar o script localmente: [PDF](https://docs.google.com/document/d/1ZOlzRWwjN_eufH4mNfXJrsYaXgW2XWKz75QBpW9vHRk/edit?usp=sharing)*
 
 
 *Criado por: [Thiago Santos](https://github.com/thiagosantos0) e [João Viola](https://github.com/jadviola)* <br/>
