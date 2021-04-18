@@ -38,7 +38,7 @@ Três arquivos externos são necessários:
 
 
 ## Guia para reproduzir localmente:
-*PDF com o guia para rodar o script localmente: [PDF](https://docs.google.com/document/d/1ZOlzRWwjN_eufH4mNfXJrsYaXgW2XWKz75QBpW9vHRk/edit?usp=sharing)*
+*PDF com o guia para rodar o script localmente: [Documento](https://docs.google.com/document/d/1ZOlzRWwjN_eufH4mNfXJrsYaXgW2XWKz75QBpW9vHRk/edit?usp=sharing)*
 
 
 *Criado por: [Thiago Santos](https://github.com/thiagosantos0) e [João Viola](https://github.com/jadviola)* <br/>
