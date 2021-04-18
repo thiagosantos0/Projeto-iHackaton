@@ -1,5 +1,5 @@
 # Projeto-iHackaton
-Este projeto foi criado com o objetivo de ser submetido para o evento "iHackaton" da iJunior, onde o tema foi **automação**.
+Este projeto foi criado com o objetivo de ser submetido para o evento "iHackaton" da iJunior, onde o tema foi **automação**. A ideia aqui foi criar um "script" que nos permitisse consultar algum jogo que foi anunciado para lançamento para o ano de 2021 e criar um evento no Google Calendar no dia do lançamento do jogo requerido.
 
 ## Sobre o script:
  Primeiramente, utilizamos o **Selenium** (um WebDriver amplamente utilizado em testes automatizados) para abrir a página em segundo plano, onde obtemos os dados de lançamento dos jogos. A partir daí, utilizamos a biblioteca BeautifulSoup para poder fazer um “parse” dos dados que coletamos em formato html. Segue abaixo a função responsável por criar uma lista com os dados dos jogos obtidos em formato HTML:
