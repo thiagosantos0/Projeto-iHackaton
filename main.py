@@ -1,66 +1,102 @@
 import requests
 import os
+import sys
 import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
-
-def readCredentials():
-    credenciais = []
-    with open (r"/mnt/c/Users/thiag/OneDrive/Área de Trabalho/credenciais.txt", 'r') as f:
-        return f.read().splitlines()
-
-def login(credenciais: list, driver):
-    email_field = driver.find_element_by_id("user_email")
-    password_field = driver.find_element_by_id("user_password")
-    email_field.send_keys(credenciais[0])
-    email_field.send_keys(Keys.RETURN)
-    password_field.send_keys(credenciais[1])
-    password_field.send_keys(Keys.RETURN)
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 def driverSetUp():
     option = webdriver.ChromeOptions()
-    option.add_argument('headless')
-    driver = webdriver.Chrome("./chromedriver.exe", options=option)
+    #option.add_argument('headless')
+    option.add_argument('--headless')
+    option.add_argument('--log-level=3')
+    option.add_argument('--ignore-ssl-errors=yes')
+    option.add_argument('--ignore-certificate-errors')
+    option.add_argument('--ignore-certificate-errors-spki-list')
+    option.add_argument('--disable-web-security')
+    option.add_argument('--disable-features=VizDisplayCompositor')
+    option.add_argument('--disable-breakpad')
+    option.add_argument('--allow-insecure-localhost')
+    desired_capabilities = option.to_capabilities()
+    desired_capabilities['acceptInsecureCerts'] = True
+    driver = webdriver.Chrome("./chromedriver.exe", desired_capabilities=desired_capabilities, options=option)
 
     return driver
 
+def getGames(html):
+    return html.find_all("span", attrs={"class":"calendar_entry"})
 
-def allEvents(soup):
-    if soup: data = []
-    for heading in soup.find_all("div", attrs={"class": "col-sm-8"}):
-        firstParentClass = heading.find_parent('div')['class'][0]
-        if firstParentClass == 'row':
-            data.append(heading)
-    return data
+def instantiation(data: list):
+    instantiated_data = []
 
+    for item in data:
+        try:
+            name = item.find("a").text
+            platforms = item.find("em").text
+            date = item.find("time").text
 
+        
+            temp = Game(name, platforms, date)
+            instantiated_data.append(temp)
+        except:
+            break
+        
+    return instantiated_data
 
+def readInput():
+    input_str = sys.argv[1]
+    return input_str
+
+def clearConsole():
+    os.system('clear')
+
+def searchGame(input_game: str, dados_instanciados: list):
+    return input_game in [x.getName() for x in dados_instanciados]    
+
+class Game:
+    ##Converter o date para Datetime object (lembrete)
+    def __init__(self, name: str, platforms: str, date: str):
+        self.name = name
+        self.platforms = platforms
+        self.date = date
+
+    def getName(self):
+        return self.name
+
+    def __repr__(self):
+        return f"Jogo: {self.name} || Plataformas: {self.platforms} || Data: {self.date}\n"
 
 def main():
     ##Criando o driver
-    url = "https://portal.brasiljunior.org.br/agenda/eventos?page=1"
+    url = "https://www.gameinformer.com/2021"
     driver = driverSetUp()
     driver.get(url)
-    
-    time.sleep(3)
 
-    ##Leitura das credenciais
-    credenciais = readCredentials()
-    login(credenciais, driver)
-
-
-    driver.get(url)
-    time.sleep(2)
     htmlSource = driver.page_source
-    
+
     soup = BeautifulSoup(htmlSource, 'html.parser')
-    dados = allEvents(soup)
-    print(dados[0])
+    dados = getGames(soup)
+    dados_instanciados = instantiation(dados)
     
+    input_game = readInput()
+    #time.sleep(3)
+    clearConsole()
+    print(dados_instanciados[0])
+    if searchGame(input_game, dados_instanciados):
+        print(f"Jogo encontrado!! {input_game}")
+        option = str(input("Deseja criar um lembrete no Google Calendar? [ S ] - Sim || [ N ] - Não: "))
+        driver.close()
+        if option.lower() == 's':
+            print("Lembrete adicionado com sucesso!!")
+        else:
+            pass
+        
 
-
+    else:
+        print("Jogo não encontrado!!")
 
 if __name__ == '__main__':
     main()
