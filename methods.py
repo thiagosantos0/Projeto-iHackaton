@@ -16,6 +16,8 @@ from oauth2client import tools
 from oauth2client.file import Storage
 from datetime import datetime, timedelta
 
+CLIENT_SECRETS_FILE = r"/mnt/c/Users/thiag/OneDrive/Área de Trabalho/private/client_secret.json"
+
 def driverSetUp():
     option = webdriver.ChromeOptions()
     option.add_argument('--headless')
