@@ -1,5 +1,4 @@
 import methods as mtds
-from bs4 import BeautifulSoup
 
 
 
